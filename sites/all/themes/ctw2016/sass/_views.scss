@@ -1,0 +1,240 @@
+#block-views-banner-block 
+{	
+
+	.views-field-body 
+	{
+		color: white;
+		font-size: 2.5em;
+		position: absolute;
+		margin: 0 auto;
+		text-align: center;
+		top:50%;
+		left: 50%;
+		top:20%\9;
+		transform:translateY(-50%)translateX(-50%);
+		-moz-transform:translateY(-50%)translateX(-50%);
+		-webkit-transform:translateY(-50%)translateX(-50%);
+	
+
+		p,h1,h2
+		{
+			color:white;
+		}
+
+		h2
+		{	
+			font-size: 62px;
+			font-weight: normal;
+		}
+	}
+
+	.views-field-field-image-banner
+	{
+		height: 540px;
+	}
+
+	.backbg
+	{
+		height: 540px;
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+
+	.views-row
+	{
+		height: 540px;
+	}
+
+	.slick-dots
+	{
+		bottom: 100px;
+		position: relative;
+		text-align: center;
+	}
+	
+}
+
+.views-field-field-image-banner 
+{
+	position: absolute;
+	width: 100%;
+	top: 0;
+	z-index: -9;
+}
+
+
+.views-row
+{
+	position:relative;
+}
+
+
+.slick-arrow
+{
+	position:absolute;
+	top:50%;
+	transform:translateY(-50%);
+	-moz-transform:translateY(-50%);
+	-webkit-transform:translateY(-50%);
+	border:0px;
+	background:transparent;
+	color:transparent;
+	width:30px;
+	height:54px;
+	cursor: pointer;
+}
+
+
+.slick-next
+{
+	right:25px;
+}
+
+.slick-prev
+{
+	left:25px;
+}
+
+
+
+.slick-dots
+{	
+	li
+	{
+		list-style: none;
+		display: inline-block;
+		
+		button
+		{	
+			padding:8px;
+			height: 0px;
+			background: white;
+			border-radius: 3px;
+			margin-right: 10px;
+			cursor: pointer;
+			font-size: 0px;
+			border: 0px;
+			width: 0px;
+		}
+	}
+
+	.slick-active button
+	{
+		background:$purple-dark;
+	}
+
+}
+
+#content .view-opportunity-listings
+{	
+	.view-header
+	{
+		color:$purple;
+		border-bottom: 1px solid #ccc;
+		padding:20px 10px;
+		padding-top: 0px;
+
+		h1
+		{
+			padding-bottom: 30px;
+		}
+
+		span
+		{
+			font-size: 24px;
+			font-weight: bold;
+		}
+
+		.polygon
+		{
+			background:url(../images/polygon.png) no-repeat;
+			display: inline-block;
+			width: 30px;
+			height: 13px;
+			float: none;
+			background-position: center;
+		}
+	}
+
+	.views-row
+	{
+		.label
+		{
+			display: none;
+			color:$purple;
+		}
+	}
+
+	.item-list
+	{
+		padding: 20px 10px;
+       	
+       	li
+       	{
+       		font-weight: bold;
+       		color: $purple;
+       	}
+       	a
+       	{
+       		color:$grey;
+       		&:hover
+       		{
+       			color:$purple;
+       			text-decoration: underline;
+       		}
+       	}
+	}
+
+	.views-row
+	{
+		clear: left;
+		border-bottom: 1px solid #ccc;
+		overflow: hidden;
+
+		a
+		{
+			color:$grey;
+			padding: 20px 10px;
+			display: block;
+			overflow: hidden;
+
+			&:hover
+			{
+				color:$purple;
+			}
+		}
+
+		&:hover
+		{
+			background:#f2f2f2;
+		}
+	}
+
+	.view-header span,.views-row .field-content a > div
+	{
+		float: left;
+		width: 25%;
+	}
+}
+
+.view-listing-description
+{
+	.views-row
+	{
+		.views-field
+		{	
+			overflow: hidden;
+			padding-bottom: 20px;
+		}
+	}
+
+	.views-label
+	{
+		font-weight: bold;
+		color: $purple;
+		float: left;
+		padding-right: 20px;
+	}
+}
+

@@ -1,0 +1,813 @@
+@font-face {
+	font-family: 'Conv_docteur_atomic';
+	
+	src:url('../fonts/docteur_atomic.woff') format('woff'), 
+	url('../fonts/docteur_atomic.ttf') format('truetype'),
+	 url('../fonts/docteur_atomic.svg') format('svg'),
+	 url('../fonts/docteur_atomic.eot');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body
+{
+	font-family: "Helvetica Neue", sans-serif;
+	color: $grey;
+	-webkit-font-smoothing: antialiased;
+}
+
+h1,h2
+{
+	font-family:'Conv_docteur_atomic';
+	color:$purple;
+	font-weight: normal;
+	padding-bottom: 20px;
+	text-transform: lowercase;
+	line-height: 0.8em;
+}
+
+h1,
+.block h2
+{
+	font-size: 98px;
+}
+
+h3,
+h4
+{
+	color: $purple;
+	padding: 10px 0px;
+}
+
+h3
+{
+	font-size: 28px;
+}
+
+h2
+{
+	font-size: 78px;
+}
+
+#page-title
+{	
+	color:white;
+	text-align: center;
+	padding: 130px 0px;
+}
+
+.button,
+.form-submit,
+.webform-submit,
+.views-more-link
+{
+	padding:13px 45px;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-size: 1.2em;
+	margin: 20px 0px;
+	max-width: 320px;
+	display: inline-block;
+	color:$purple;
+	border: 2px solid $purple;
+	background: transparent;
+	cursor: pointer;
+	box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
+
+	&:hover
+	{
+		background-color: $purple;
+		color: white;
+	}
+}
+
+@mixin transform($transforms) {
+	   -moz-transform: $transforms;
+	     -o-transform: $transforms;
+	    -ms-transform: $transforms;
+	    -webkit-transform: $transforms;
+          transform: $transforms;
+}
+
+.layout
+{
+	max-width: 960px;
+	margin: 0 auto;
+}
+
+#navigation
+{	
+	padding: 20px 30px 0px;
+	box-shadow: 10px 1px 10px rgba(0,0,0,0.5);
+	position: relative;
+
+	li
+	{	
+		display: inline-block;
+		list-style: none;
+		padding:0px;
+		margin: 0px 10px;
+		position: relative;
+
+		a
+		{	
+			display: block;
+			color:$grey;
+			text-decoration: none;
+
+			&:hover,
+			&.active
+			{
+				color:$purple;
+			}
+		}
+	}
+}
+
+#block-system-main-menu
+{	
+	a,.nolink
+	{
+		padding: 15px 0px 20px;
+		position: relative;
+		font-weight: bold;
+		display: block;
+	}
+
+	li a.active:after,
+	li a:hover:after
+	{	
+		content: "";
+		display: block;
+		width:100%;
+		position: absolute;
+		bottom:0px;
+		border-bottom: 3px solid $purple;
+	}
+
+	.mobile-social-links
+	{
+		display: none;
+	}	
+
+	&>.content > .menu > li.expanded
+	{
+
+		&:hover > ul.menu
+		{
+			display: block;
+
+		}
+
+		&>ul.menu
+		{	
+			position: absolute;
+			background: white;
+			top: 54px;
+			display: none;
+			min-width: 200px;
+			z-index: 1;
+			a,.nolink
+			{
+				padding: 15px 0px;
+			}
+
+			li
+			{
+				float: none;
+				display: block;
+			}
+
+			li.expanded .menu li,
+			li.expanded >span
+			{
+				border-bottom: 1px solid $purple-dark;
+			}
+		}
+	}
+}
+
+.front #content
+{
+	display: none;
+}
+
+#logo
+{	
+	float: left;
+}
+
+#logo+div
+{
+	float: right;
+}
+
+#block-menu-menu-social-menu
+{	
+	.content
+	{
+		li
+		{
+			border: 3px solid $purple;
+			border-radius:4px;
+		}
+
+		ul.menu
+		{
+			text-align: right;
+		}
+
+		
+	}
+	
+}
+
+#block-menu-menu-social-menu .content ,	
+.mobile-social-links
+{	
+	a
+	{
+		font-size: 0px;
+		padding:15px;
+		background-repeat: no-repeat;
+		background-position: center;
+
+		&:before
+		{	
+			content: "";
+			position: absolute;
+			left: -2000px;
+		}
+
+		&:hover
+		{
+			background-color: $purple;
+		}
+	}
+}	
+
+#contact-top a,
+#mobile-contact a
+{
+	background-image: url(../images/contact-top-purple-icon.png);
+
+	&:before
+	{
+		content: url(../images/contact-top-white-icon.png);
+	}
+
+	&:hover
+	{
+		background-image: url(../images/contact-top-white-icon.png);
+	}
+}
+
+#fb-top a,
+#fb-mobile a
+{
+	background-image: url(../images/fb-top-purple-icon.png);
+
+	&:before
+	{
+		content: url(../images/fb-top-white-icon.png);
+	}
+
+	&:hover
+	{
+		background-image: url(../images/fb-top-white-icon.png);
+	}
+}
+
+#twitter-top a,
+#twitter-mobile a
+{
+	background-image: url(../images/twitter-top-purple-icon.png);
+
+	&:before
+	{
+		content: url(../images/twitter-top-white-icon.png);
+	}
+
+	&:hover
+	{
+		background-image: url(../images/twitter-top-white-icon.png);
+	}
+}
+
+#main-wrapper,
+#white-region,
+#middle-region,
+#contact-region
+{
+	p
+	{
+		line-height: 1.4em;
+		padding-bottom: 20px;
+	}
+
+	.region-white-region,
+	.region-middle-region,
+	.region-contact-region
+	{	
+		@extend .layout;
+		padding: 20px 10px;
+		position: relative;
+	}
+
+	.region-white-region
+	{
+		position: relative;
+		margin-bottom: -88px;
+		z-index: 10;
+	}
+}
+
+#middle-region
+{
+	padding: 230px 0px;
+
+	.region-middle-region
+	{
+		text-align: center;
+	}
+
+	p
+	{
+		color: white;
+	}
+
+	.button,
+	.form-submit
+	{
+		border-color: white;
+		color:white;
+		font-size: 1.2em;
+		display: block;
+		padding: 15px 0px;
+		margin: 0 auto;
+
+		&:hover
+		{
+			border-color:$purple;
+		}
+	}
+}	
+
+
+#white-region,
+#footer,
+#main-wrapper
+{	
+	position: relative;
+
+	&:before,
+	.inclined-plane:before
+	{
+		content: "";
+		display: block;
+		height: 200px;
+		width: 50%;
+		position: absolute;
+		top:-70px;
+		background-color: white;
+		border: 1px solid white;
+		
+	}
+
+	&:before
+	{
+		@include transform(skewY(5deg));
+		background-image: url(../images/spots.png);
+		background-repeat: no-repeat;
+		background-size: contain;
+	}
+
+	.inclined-plane:before
+	{
+		@include transform(skewY(-5deg));
+		right: 0px;
+	}
+}
+
+#content
+{
+	@extend .layout;
+	padding-bottom: 180px;
+	padding-left:10px;
+	padding-right: 10px;
+
+	h1,
+	.tabs,
+	.messages
+	{
+		position: relative;
+	}
+
+	.region-content
+	{
+		position: relative;
+
+		img
+		{
+			padding: 10px;
+		}
+	}
+
+	ul
+	{
+		margin-left: 30px;
+
+		li
+		{
+			padding-bottom: 10px;
+		}
+	}
+
+	#block-agenda-1
+	{
+		ul
+		{
+			margin-left: 0px;
+		}
+	}
+
+	a
+	{
+		color:$purple;
+		text-decoration: none
+	}
+}
+
+.after-element
+{
+	width: 100%;
+	top: auto;
+	bottom: 13px;
+	height: 180px;
+	position: absolute;
+	background-color: white;
+	@include transform(skewY(-5deg));
+	background-image: url(../images/spots-bottom.png);
+	background-repeat: no-repeat;
+	background-position: bottom right;
+	background-size: contain;
+}
+
+#white-region
+{
+	&:after
+	{	
+		content: "";
+		@extend .after-element;
+		
+	}
+}
+
+#contact-region
+{
+	background-color: $purple-dark;
+	position: relative;
+	padding-bottom: 100px;
+
+	.block h2
+	{
+		color: white;
+		padding-bottom: 20px;
+	}
+
+	#block-block-11
+	{
+		display: none;
+		position: fixed;
+		background: white;
+		border-radius: 5px;
+		text-align: center;
+		z-index: 11;
+		top:50%;
+		left: 50%;
+		padding: 50px;
+		transform: translateX(-50%) translateY(-50%);
+
+		h2
+		{
+			color:$purple;
+		}
+
+		p
+		{
+			color:$grey!important;
+		}
+	}
+
+
+	#block-webform-client-block-2
+	{
+		margin-top: -50px;
+		width: 60%;
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	&:before
+	{	
+		content: "";
+		display: block;
+		height: 177px;
+		position: absolute;
+		top:-84px;
+		width: 100%;
+		background-color: $purple-dark;
+		background-image: url(../images/spots-contact.png);
+		background-position: center right;
+		background-repeat: no-repeat;
+		@include transform(skewY(5deg));
+	}
+
+	#fb,#twitter,
+	.webform-component-markup a
+	{
+	
+		font-size: 0px;
+		color: transparent;
+		border: 3px solid $purple;
+		padding: 15px 26px;
+		border-radius: 5px;
+		display: block;
+		min-height: 20px;
+
+		&:before
+		{
+			content: url(../images/contact-white-icon.png);
+			position: absolute;
+			left: -2000px;
+		}
+
+		&:hover
+		{
+			background: url(../images/contact-white-icon.png) no-repeat;
+			background-position: 9px center;
+			background-color:#804398;
+		}
+	}
+
+	#fb
+	{
+		background: url(../images/fb-purple-icon.png) no-repeat;
+		background-position: center;
+
+		&:before
+		{
+			content:  url(../images/fb-white-icon.png);
+		}
+
+		&:hover
+		{
+			background: url(../images/fb-white-icon.png) no-repeat;
+			background-position: center;
+			background-color:#804398;
+		}
+	}
+
+	#twitter
+	{
+		background: url(../images/twitter-purple-icon.png) no-repeat;
+		background-position: center;
+
+		&:before
+		{
+			content: url(../images/twitter-white-icon.png);
+		}
+
+		&:hover
+		{
+			background: url(../images/twitter-white-icon.png) no-repeat;
+			background-position: center;
+			background-color:#804398;
+		}
+	}
+}
+
+#social-buttons
+{
+	display: inline-block;
+	width: 58px;
+	vertical-align: top;
+}
+
+#fb-timeline,
+#twitter-timeline
+{
+	width:300px;
+	display: inline-block;
+	float: right;
+	p
+	{
+		padding-bottom:0px;
+	}
+}
+
+a.twitter-timeline
+{
+	background:$purple;
+	color:white;
+}
+
+
+#twitter-timeline
+{
+	display: none;
+
+
+	iframe
+	{
+		.tweets p{color: white}
+
+		html,p,li
+		{
+			color: white;
+		}
+
+	}
+
+	blockquote.twitter-tweet
+	{
+		color:white;
+	}
+
+}
+
+
+
+.front
+{	
+	#main-wrapper
+	{
+		display: none;
+	}
+
+	#middle-region
+	{
+		background: url(../images/park2.jpg);
+		background-size: cover;
+		background-repeat: no-repeat;
+		color: white;
+		box-shadow: 0px 1000px 0px rgba(0,0,0,0.5) inset;
+
+		#block-block-2
+		{
+			.button
+			{	
+				padding: 13px 1.5em;
+				margin-top: 20px;
+			}
+		}
+	}
+
+	#middle-region .region-middle-region
+	{
+		text-align: center;
+		
+		h1
+		{
+			text-shadow: 2px 2px 2px $purple;
+		}
+	
+		.button,
+		h1,p
+		{
+			color: white;
+		}
+	}
+}
+
+
+#footer
+{	
+	text-align: center;
+	padding: 0px 0px 60px;
+
+	.region-footer
+	{
+		padding-bottom:40px;
+		position: relative;
+		@extend .layout;
+		border-bottom: 1px solid #ccc;
+
+		img
+		{	
+			vertical-align: middle;
+			padding: 0px 20px;
+		}
+	}
+
+	&:after
+	{
+		display: none;
+	}
+
+	&:before{
+		background-image: none;
+	}
+
+	#copyright
+	{
+		margin-top: 50px;
+		font-size: 12px;
+
+		a
+		{
+			color: $grey;
+		}
+	}
+}
+
+
+.not-front #banner
+{
+	background: url(../images/youth-volunteers-bg.jpg) no-repeat;
+	background-size: cover;
+	background-position: center;
+	height: 430px;
+}
+  
+.not-front
+{
+	#middle-region
+	{	
+		padding: 180px 0px;
+		background: url(../images/about2.jpg) no-repeat;
+		background-size: cover;
+	}
+}
+
+.page-node-3
+{	
+	#banner
+	{
+		background-image: url(../images/teamwork-bg.jpg);
+		background-size: cover;
+		background-repeat: no-repeat;
+	}
+}
+
+
+.page-node-3,
+.page-opportunity-listings
+{
+	#page-title
+	{
+		color:transparent;
+	}
+}
+
+.page-opportunity-listings
+{
+	#banner
+	{
+		background-image: url(../images/volunteers-bg.jpg);
+		background-position: center;
+	}
+}
+
+
+.page-node-3,
+.page-node-9,
+.page-node-12
+{	
+	#content
+	{
+		position: relative;
+		margin-bottom: -88px;
+		z-index: 10;
+		padding-bottom:100px;
+	}
+
+	#main-wrapper:after
+	{
+		content: "";
+		@extend .after-element;
+	}
+
+}
+
+#mobile-menu
+{
+	display: none;
+}
+
+#node-19
+{
+	.field
+	{
+		padding-bottom:20px;
+	}
+}
+
+.views-row-1
+{
+	.mobile-banner-logo
+	{
+		display: none;
+	}
+}
+

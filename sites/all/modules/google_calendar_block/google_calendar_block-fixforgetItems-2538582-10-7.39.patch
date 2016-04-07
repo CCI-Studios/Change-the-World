@@ -1,0 +1,157 @@
+diff --git a/google_calendar_block.module b/google_calendar_block.module
+index 88a24dc..2579572 100644
+--- a/google_calendar_block.module
++++ b/google_calendar_block.module
+@@ -152,6 +152,7 @@ function google_calendar_block_form_block_admin_display_form_alter(&$form, &$for
+  *   - calendar_id: The ID of the calendar to display.
+  *   - calendar_order_by: The order of the calendar events.
+  *   - calendar_max_results: How many events are displayed.
++ *   - calendar_cache: Whether or not to cache this block and it's settings.
+  *   - calendar_limit_date_range: Determines whether or not calendar events should be limited to a certain date range.
+  *   - calendar_display_todays_events: Limits events to only those that occur on the current day.
+  *   - calendar_start_min: Determines the earliest event to list. Inclusive.
+@@ -212,8 +213,10 @@ function google_calendar_block_custom_block_form($edit = array()) {
+     'application_name' => '',
+     'developer_key' => '',
+     'calendar_id' => '',
++    'calendar_block' => '',
+     'calendar_order_by' => 'starttime',
+     'calendar_max_results' => '',
++    'calendar_cache' => FALSE,
+     'calendar_limit_date_range' => FALSE,
+     'calendar_display_todays_events' => TRUE,
+     'calendar_start_min' => array(
+@@ -301,6 +304,11 @@ function google_calendar_block_custom_block_form($edit = array()) {
+     '#default_value' => $edit['calendar_max_results'],
+     '#description' => t('Maximum number of events to display.'),
+   );
++  $form['calendar_cache'] = array(
++    '#type' => 'checkbox',
++    '#title' => t('Cache this block and settings'),
++    '#default_value' => $edit['calendar_block'],
++  );
+   $form['calendar_limit_date_range'] = array(
+     '#type' => 'checkbox',
+     '#title' => t('Limit events to a specific date range'),
+@@ -363,6 +371,7 @@ function google_calendar_block_block_save($delta = 0, $edit = array()) {
+  *   - calendar_id: The ID of the calendar to display.
+  *   - calendar_order_by: The order of the calendar events.
+  *   - calendar_max_results: How many events are displayed.
++ *   - calendar_cache: Whether or not to cache this block and it's settings.
+  *   - calendar_limit_date_range: Determines whether or not calendar events should be limited to a certain date range.
+  *   - calendar_display_todays_events: Limits events to only those that occur on the current day.
+  *   - calendar_start_min: Determines the earliest event to list. Inclusive.
+@@ -377,6 +386,7 @@ function google_calendar_block_custom_block_save($edit, $delta) {
+   $data = array(
+     'calendar_order_by' => $edit['calendar_order_by'],
+     'calendar_max_results' => $edit['calendar_max_results'],
++    'calendar_cache' => $edit['calendar_cache'],
+     'calendar_limit_date_range' => $edit['calendar_limit_date_range'],
+     'calendar_display_todays_events' => $edit['calendar_display_todays_events'],
+     'calendar_start_min' => array(
+@@ -425,7 +435,11 @@ function google_calendar_block_block_view($delta) {
+   $block['subject'] = check_plain($config['info']);
+ 
+   // Statically cache the calendar data to improve performance.
+-  $calendars = &drupal_static(__FUNCTION__);
++  if (!empty($data['calendar_cache'])) {
++    $calendars = &drupal_static(__FUNCTION__);
++  } else {
++    $calendars = array();
++  }
+ 
+   // Calendar data is cached per block.
+   $cid = 'google_calendar_block:' . $delta;
+@@ -441,7 +455,7 @@ function google_calendar_block_block_view($delta) {
+       // Load the Google API PHP Client library.
+       if (($library = libraries_load('google-api-php-client')) && !empty($library['loaded'])) {
+         // Load the calendar data if it's not found in the persistent cache.
+-        if ($cache = cache_get($cid, 'cache_google_calendar_block')) {
++        if (!empty($data['calendar_cache']) && $cache = cache_get($cid, 'cache_google_calendar_block')) {
+           $calendars[$cid] = $cache->data;
+         }
+         else {
+@@ -506,13 +520,17 @@ function google_calendar_block_block_view($delta) {
+                 'creator_email' => $event_feed->getCreator()->getEmail(),
+                 'creator_display_name' => $event_feed->getCreator()->getDisplayName(),
+                 'start' => _google_calendar_block_google_date_to_timestamp($event_feed->getStart()->getDateTime()),
++                'startdate' => _google_calendar_block_google_date_to_timestamp($event_feed->getStart()->getDate()),
+                 'end' => _google_calendar_block_google_date_to_timestamp($event_feed->getEnd()->getDateTime()),
++                'enddate' => _google_calendar_block_google_date_to_timestamp($event_feed->getEnd()->getDate()),
+               );
+ 
+-              $calendars[$cid] = $data;
++              $calendars[$cid][] = $data;
+             }
+ 
+-            cache_set($cid, $calendars[$cid], 'cache_google_calendar_block', CACHE_TEMPORARY);
++            if (!empty($data['calendar_cache'])) {
++              cache_set($cid, $calendars[$cid], 'cache_google_calendar_block', CACHE_TEMPORARY);
++            }
+           }
+           catch (Exception $e) {
+             watchdog('google_calendar_block', $e->getMessage(), array(), WATCHDOG_ERROR);
+@@ -525,35 +543,35 @@ function google_calendar_block_block_view($delta) {
+   $items = array();
+ 
+   if (!empty($calendars[$cid])) {
+-    foreach ($calendars[$cid]->getItems() as $event_feed) {
+-      $variables = array(
+-        'created' => _google_calendar_block_google_date_to_timestamp($event_feed->getCreated()),
+-        'description' => $event_feed->getDescription(),
+-        'hangout_link' => $event_feed->getHangoutLink(),
+-        'html_link' => $event_feed->getHtmlLink(),
+-        'location' => $event_feed->getLocation(),
+-        'summary' => $event_feed->getSummary(),
+-        'updated' => _google_calendar_block_google_date_to_timestamp($event_feed->getUpdated()),
+-        'creator_email' => $event_feed->getCreator()->getEmail(),
+-        'creator_display_name' => $event_feed->getCreator()->getDisplayName(),
+-        'start' => _google_calendar_block_google_date_to_timestamp($event_feed->getStart()->getDateTime()),
+-        'end' => _google_calendar_block_google_date_to_timestamp($event_feed->getEnd()->getDateTime()),
+-      );
++    foreach ($calendars[$cid] as $event_feed) {
++      $variables = $event_feed;
+ 
+       $items[] = theme('google_calendar_block_event', $variables);
++
+     }
+   }
+ 
+-  $block['content'] = array(
+-    '#theme' => 'item_list',
+-    '#items' => $items,
+-    '#type' => 'ul',
+-  );
++  $output = '';
++  drupal_alter('calendar_block_content', $items, $output);
++  $block['content'] = $output;
+ 
+   return $block;
+ }
+ 
+ /**
++ * Implements hook_calendar_block_content_alter().
++ */
++function google_calendar_block_calendar_block_content_alter(&$items, &$output) {
++  if ($output == '') {
++    $output = array(
++      '#theme' => 'item_list',
++      '#items' => $items,
++      '#type' => 'ul',
++    );
++  }
++}
++
++/**
+  * Helper function to convert a Google date into a Unix timestamp
+  *
+  * @param $date
+@@ -579,7 +597,7 @@ function _google_calendar_block_google_date_to_timestamp($date) {
+  * Implements template_preprocess_hook().
+  */
+ function template_preprocess_google_calendar_block_event(&$variables) {
+-  foreach (array('created', 'updated', 'start', 'end') as $variable) {
++  foreach (array('created', 'updated', 'start', 'end', 'startdate', 'enddate') as $variable) {
+     if (!empty($variables[$variable])) {
+       $variables[$variable] = format_date($variables[$variable]);
+     }

@@ -1,0 +1,26 @@
+name = ctw2016
+description = ctw2016 Custom
+core = 7.x
+
+;scripts[] = js/filename.js
+
+scripts[] = js/banner.js
+scripts[] = js/social-feed.js
+scripts[] = js/slick/slick.js
+scripts[] = js/script.js
+
+
+stylesheets[all][] = stylesheets/screen.css
+stylesheets[all][] = js/slick/slick.css
+
+regions[navigation] = Navigation
+regions[banner] = banner
+regions[white-region] = White Region
+regions[middle-region] = Middle Region
+regions[help] = Help
+regions[content] = Content
+regions[contact-region] = Contact Region
+regions[sidebar] = Sidebar
+regions[widgets] = Widgets
+regions[footer] = Footer
+

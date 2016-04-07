@@ -1,0 +1,47 @@
+diff --git a/google_calendar_block.module b/google_calendar_block.module
+index 88a24dc..b8872dc 100644
+--- a/google_calendar_block.module
++++ b/google_calendar_block.module
+@@ -493,7 +493,6 @@ function google_calendar_block_block_view($delta) {
+           // Retrieve the calendar event feed.
+           try {
+             $events = $service->events->listEvents($calendarId, $optParams);
+-
+             foreach ($events->getItems() as $event_feed) {
+               $data = array(
+                 'created' => _google_calendar_block_google_date_to_timestamp($event_feed->getCreated()),
+@@ -508,8 +507,7 @@ function google_calendar_block_block_view($delta) {
+                 'start' => _google_calendar_block_google_date_to_timestamp($event_feed->getStart()->getDateTime()),
+                 'end' => _google_calendar_block_google_date_to_timestamp($event_feed->getEnd()->getDateTime()),
+               );
+-
+-              $calendars[$cid] = $data;
++              $calendars[$cid][] = $data;
+             }
+ 
+             cache_set($cid, $calendars[$cid], 'cache_google_calendar_block', CACHE_TEMPORARY);
+@@ -525,22 +523,8 @@ function google_calendar_block_block_view($delta) {
+   $items = array();
+ 
+   if (!empty($calendars[$cid])) {
+-    foreach ($calendars[$cid]->getItems() as $event_feed) {
+-      $variables = array(
+-        'created' => _google_calendar_block_google_date_to_timestamp($event_feed->getCreated()),
+-        'description' => $event_feed->getDescription(),
+-        'hangout_link' => $event_feed->getHangoutLink(),
+-        'html_link' => $event_feed->getHtmlLink(),
+-        'location' => $event_feed->getLocation(),
+-        'summary' => $event_feed->getSummary(),
+-        'updated' => _google_calendar_block_google_date_to_timestamp($event_feed->getUpdated()),
+-        'creator_email' => $event_feed->getCreator()->getEmail(),
+-        'creator_display_name' => $event_feed->getCreator()->getDisplayName(),
+-        'start' => _google_calendar_block_google_date_to_timestamp($event_feed->getStart()->getDateTime()),
+-        'end' => _google_calendar_block_google_date_to_timestamp($event_feed->getEnd()->getDateTime()),
+-      );
+-
+-      $items[] = theme('google_calendar_block_event', $variables);
++    foreach ($calendars[$cid] as $event_feed) {
++      $items[] = theme('google_calendar_block_event', $event_feed);
+     }
+   }
+ 

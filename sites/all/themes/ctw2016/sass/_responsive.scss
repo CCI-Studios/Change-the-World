@@ -1,0 +1,370 @@
+@media only screen and (max-width:960px)
+{
+	#mobile-menu
+	{
+		display: block;
+		font-size: 0;
+		color: transparent;
+		height:30px;
+		width:26px;
+		background-image:url("../images/mobile-icon.png");
+		background-repeat:no-repeat;
+		float: right;
+		margin-top: 30px;
+		cursor: pointer;
+
+	}
+
+	.views-row-1
+	{
+		.banner-logo
+		{
+			display: none;
+		}
+
+		.mobile-banner-logo
+		{
+			display: block;
+		}
+	}
+
+	#block-system-main-menu,
+	#block-menu-menu-social-menu
+	{
+		display: none;
+	}
+
+	#navigation
+	{	
+		padding-bottom:15px;
+		li
+		{
+			display: block;
+		}
+	}
+
+	.mobile-social-links
+	{
+		display: block;
+	}
+
+	#block-system-main-menu
+	{	
+		display: none;
+		position: absolute;
+		height: auto;
+		right:0px;
+		left:0px;
+		top: 96px;
+		background:$purple;
+		z-index: 9999;
+
+
+		&>.content>.menu
+		{	
+			li
+			{
+				display: block;
+				margin: 0px 10px;
+			}
+
+			.mobile-social-links
+			{
+				display: inline-block;
+				margin: 15px;
+
+				a
+				{
+					background-color: white;
+					padding: 15px;
+					border:3px solid white;
+					border-radius: 3px;
+
+					&:hover
+					{
+						background-color: $purple;
+					}
+				}
+			}
+
+
+			a,.nolink
+			{
+				color:white;
+				padding-bottom: 0px;
+				display: block;
+				padding:15px 10px;
+				border-bottom: 1px solid $purple-dark;
+
+
+				&:hover:after
+				{	
+					display: none;
+					border-bottom:0px;
+				}
+
+			}
+
+			&>li.expanded >ul.menu
+			{	
+				position: relative;
+				display: block;
+				margin-top: 0;
+				margin-right: 0;
+				width: 100%;
+				top: auto;
+				background: inherit;
+
+				li.expanded .menu li
+				
+				{
+					border-bottom: 0px;
+				}
+
+				li
+				{
+					border-bottom:0px;
+					margin: 0px;
+				}
+
+				.nolink
+				{
+					padding-left:20px;
+				}
+
+				li a
+				{
+					padding:15px 25px;
+				}
+
+				li:first-child:before
+				{
+					display: none;
+				}
+			}
+		}
+	}
+
+	#fb-timeline, #twitter-timeline
+	{
+		padding-left: 10px;
+	}
+
+	#contact-region 
+	{	
+		.region-contact-region
+		{
+			max-width: 400px;
+			margin: 0 auto;
+		}
+
+		.webform-client-form .webform-component
+		{
+			width: 96%;
+			margin-right: 0px;
+		}
+
+		#block-webform-client-block-2
+		{
+			width: auto;
+			display: block;
+		}
+
+		.webform-client-form
+		{	
+			padding-left:70px;
+
+			.webform-component-markup
+			{
+				width: auto;
+				left: 10px;
+			}
+
+			.webform-component-textarea
+			{
+				max-width: 300px;
+				width: auto;
+			}
+
+			.webform-component-textarea
+			{
+				max-width: 100%;
+			}
+
+			.webform-component
+			{
+				margin-top: 1em;
+				margin-bottom: 1em;
+			}
+		}
+	}
+
+	#block-block-3
+	{
+		width: auto;
+	}
+
+	h1, .block h2
+	{
+		font-size: 78px;
+	}
+
+	.page-node-9,
+	.page-node-12
+	{
+		#middle-region .block
+		{
+			margin-bottom: 50px;
+		}
+	}
+
+	.page-node-26
+	{
+		.image
+		{
+			width: 95%;
+			height: auto;
+		}
+	}
+
+}
+
+@media only screen and (max-width:767px)
+{
+	.not-front #middle-region .block
+	{
+		width: 100%;
+		display: block;
+		padding-right:inherit;
+		padding-bottom: 20px;
+		min-height: auto;
+
+		.button,
+		.form-actions input
+		{
+			position: relative;
+			margin-top: 20px;
+			left: 0px;
+		}
+
+		.form-actions input
+		{
+			margin: 0 auto;
+		}
+	}
+
+	.page-node-26
+	{
+		.image
+		{
+			width: 95%;
+			height: auto;
+		}
+	}
+	.field-name-body
+	{
+		img
+		{
+			float: none!important;
+		}
+	}
+
+	#content .view-opportunity-listings 
+	{
+		.views-row .field-content a > div
+		{
+			float: none;
+			width: auto;
+		}
+
+		.view-header 
+		{
+			p
+			{
+				display: none;
+			}
+		}
+
+		.views-row 
+		{	
+			span,
+			.label
+			{
+				display:inline-block;
+				padding-bottom: 10px;
+			}
+
+			.label
+			{
+				width: 100px;
+			}
+		
+		}
+	}
+
+	#content
+	{
+		.webform-client-form,.node-form
+		{	
+			.webform-component,
+			.field-type-text,
+			.form-item-title,
+			.field-type-datetime,
+			.field-type-email
+			{
+				width: 100%;
+			}
+
+			.webform-component-select,
+			.field-type-datetime
+			{	
+				width: 100%;
+				select,
+				input
+				{
+					width: 95%;
+				}
+				
+			}
+		}
+	}
+
+}
+
+@media only screen and (max-width:460px)
+{
+	#fb-timeline, #twitter-timeline
+	{
+		padding-left: 10px;
+		width: 225px;
+	}
+
+	#navigation
+	{
+		padding: 20px 10px 15px;
+	}
+
+	#page-title
+	{
+		padding: 100px 0px;
+	}
+
+	#logo
+	{
+		width: 250px;
+
+		img
+		{
+			width: 100%;
+		}
+	}
+
+	#block-block-4
+	{
+		.content a
+		{
+			display: block;
+			padding: 10px;
+		}
+	}
+}

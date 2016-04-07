@@ -1,0 +1,203 @@
+#block-block-3
+{
+	display: inline-block;
+	width: 39%;
+	padding-top: 35px;
+}
+
+#block-block-5
+{
+	padding-right: 1.2em;
+}
+
+#block-block-1
+{
+	margin-top: -40px;
+
+	h2
+	{
+		line-height: 1em;
+		padding-bottom: 0px;
+	}
+
+	.button
+	{
+		padding:13px 30px;
+		box-shadow: none;
+	}
+}
+
+.not-front #middle-region
+{
+	.block
+	{	
+		width:48%;
+		display: inline-block;
+		vertical-align: top;
+		text-align: center;
+		font-weight: bold;
+		position: relative;
+
+		h2
+		{
+			color: white;
+			font-size: 47px;
+			line-height: 0.6;
+			padding-bottom: 10px;
+			text-transform: lowercase;
+
+			&:after
+			{
+				content: url(../images/dots.png);
+				display: block;
+			}
+		}
+
+		.content
+		{
+			padding: 0 10px;
+		}
+	}
+}
+
+.page-node-9,
+.page-node-12
+{
+	#middle-region .block
+	{
+		width: 300px;
+		min-height: 350px;
+		margin-right:20px;
+		margin-bottom: 20px;
+
+		&:last-child
+		{
+			margin-right:0px;
+		}
+		p
+		{
+			padding-bottom: 0px;
+		}
+
+		.button,
+		.form-submit
+		{
+			bottom: 0;
+			margin: 20px auto 0px;
+			width: 95%;
+		}
+
+		.form-actions
+		{
+			width: 100%;
+			margin-bottom: 0px;
+
+			input
+			{
+				margin: 0px;
+			}
+		}
+	}
+}
+
+.page-node-12
+{
+	#middle-region .block
+	{
+		width: 48%;
+		height: auto;
+		min-height: 290px;
+
+		.button
+		{
+			left: 80px;
+		}
+	}
+}
+
+#block-agenda-1
+{
+	.agenda-block
+	{
+		&>p
+		{
+			font-size: 22px;
+			font-weight: bold;
+			color:$purple;
+		}
+
+		ol
+		{
+			border-bottom: 1px solid #ccc;	
+			margin-bottom: 20px;
+			padding-bottom: 20px;
+			
+		}
+
+		.calendar_title
+		{
+			background: url(../images/polygon.png) no-repeat;
+			background-position:right top;
+			display: block;
+			font-size: 18px;
+		}
+
+		.calendar_title.open
+		{
+			background: url(../images/polygon-up.png) no-repeat;
+			background-position:right top;
+		}
+
+
+		li,span
+		{
+			color:$grey;
+			padding-left:0px;
+
+		}
+
+		span
+		{
+			padding-right: 20px;
+		}
+
+		.cal_0
+		{
+			background: white;
+		}
+	}
+}
+
+#block-google-calendar-block-1
+{	
+	li
+	{
+		list-style: none;
+		border-bottom: 1px solid #ccc;	
+		margin-bottom: 20px;
+	}
+	.event 
+	{	
+		div
+		{
+			padding-bottom:10px;
+			clear: left;
+		}
+
+		.label
+		{
+			float: left;
+			font-weight: bold;
+			padding-right: 20px;
+			color:$purple;
+		}
+
+		.description
+		{
+			.label
+			{
+				float: none;
+			}
+		}
+	}
+}
